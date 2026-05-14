@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manaqib App — Mind Map</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0f14;
+    color: #e8ecf0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+  .header {
+    text-align: center;
+    padding: 32px 20px 12px;
+    background: linear-gradient(135deg, #0D4B3F, #083329);
+    border-bottom: 2px solid rgba(212,168,67,0.3);
+  }
+  .header h1 {
+    font-size: 28px;
+    color: #D4A843;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .header p {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 20px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(212,168,67,0.2);
+    background: rgba(13,75,63,0.3);
+    color: #9ba5b0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .tab:hover { border-color: rgba(212,168,67,0.5); color: #e8ecf0; }
+  .tab.active {
+    background: linear-gradient(135deg, #0D4B3F, #1A6B5A);
+    border-color: #D4A843;
+    color: #D4A843;
+  }
+  .diagram-container {
+    display: none;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  .diagram-container.active { display: block; }
+  .diagram-container .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+  .diagram-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: rgba(255,255,255,0.2);
+    font-size: 11px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🕌 Manaqib App</h1>
+  <p>Masjid Darussa'adah — Architecture Mind Map</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('overview')">🗺️ Overview</button>
+  <button class="tab" onclick="showTab('navigation')">🧭 Navigation Flow</button>
+  <button class="tab" onclick="showTab('screens')">📱 Screens Detail</button>
+  <button class="tab" onclick="showTab('data')">💾 Data & State</button>
+  <button class="tab" onclick="showTab('design')">🎨 Design System</button>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<div id="overview" class="diagram-container active">
+<div class="mermaid">
+graph TB
+    subgraph APP["🕌 Manaqib App — Flutter"]
+        direction TB
+        MAIN["main.dart<br/>MultiProvider<br/>MaterialApp.router"]
+        
+        subgraph THEME["🎨 Theme System"]
+            TD["theme_data.dart<br/>AppColors + AppTheme<br/>+ AppFonts"]
+            TP["theme_provider.dart<br/>ThemeProvider<br/>ThemeMode + ArabicFont"]
+        end
+        
+        subgraph ROUTER["🧭 Router — GoRouter"]
+            SPL["/splash"]
+            HOME["/"]
+            SRCH["/search"]
+            BKMK["/bookmarks"]
+            SET["/settings"]
+            READ["/reading/:id"]
+            DISC["/disclaimer"]
+        end
+        
+        subgraph STATE["⚡ State — Provider"]
+            BP["BookmarkProvider<br/>SharedPreferences"]
+        end
+        
+        subgraph DATA["📦 Data Layer"]
+            MC["manaqib_content.dart<br/>8 bacaan (static)"]
+            MD["models/manaqib.dart<br/>Manaqib + Section"]
+        end
+        
+        subgraph UI["🖼️ Screens"]
+            SS["SplashScreen"]
+            HS["HomeScreen"]
+            SES["SearchScreen"]
+            BS["BookmarksScreen"]
+            STS["SettingsScreen"]
+            RS["ReadingScreen"]
+            DS["DisclaimerScreen"]
+        end
+        
+        subgraph WIDGETS["🧩 Widgets"]
+            MS["MainShell<br/>(Bottom Nav)"]
+        end
+    end
+    
+    MAIN --> THEME
+    MAIN --> ROUTER
+    MAIN --> STATE
+    ROUTER --> UI
+    UI --> WIDGETS
+    UI --> DATA
+    UI --> STATE
+    TP --> TD
+    BP --> MC
+</div>
+</div>
+
+<!-- ===== NAVIGATION FLOW ===== -->
+<div id="navigation" class="diagram-container">
+<div class="mermaid">
+graph LR
+    START((🟢 App Start)) --> SPLASH["/splash<br/>SplashScreen"]
+    SPLASH -->|"Tap 'Mulai Membaca'"| HOME["/ (HomeScreen)<br/>+ MainShell"]
+    
+    subgraph SHELL["MainShell — Bottom Navigation Bar"]
+        direction TB
+        NAV_HOME["🕌 Beranda"]
+        NAV_SEARCH["🔍 Cari"]
+        NAV_BOOK["🔖 Tersimpan"]
+        NAV_SETTINGS["⚙️ Setelan"]
+    end
+    
+    HOME <--> SHELL
+    SHELL -->|"/"| HOME
+    SHELL -->|"/search"| SEARCH["SearchScreen"]
+    SHELL -->|"/bookmarks"| BOOKS["BookmarksScreen"]
+    SHELL -->|"/settings"| SETTINGS["SettingsScreen"]
+    
+    HOME -->|"Tap card"| READ["/reading/:id<br/>ReadingScreen"]
+    SEARCH -->|"Tap result"| READ
+    BOOKS -->|"Tap item"| READ
+    
+    SETTINGS -->|"Tap disclaimer"| DISCLAIMER["/disclaimer<br/>DisclaimerScreen"]
+    
+    READ -->|"Back"| PREV["Previous Screen"]
+    DISCLAIMER -->|"Back"| SETTINGS
+
+    style SPLASH fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style HOME fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SEARCH fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style BOOKS fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style SETTINGS fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style READ fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style DISCLAIMER fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style SHELL fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style START fill:#1A6B5A,stroke:#D4A843,color:#fff
+</div>
+</div>
+
+<!-- ===== SCREENS DETAIL ===== -->
+<div id="screens" class="diagram-container">
+<div class="mermaid">
+graph TB
+    subgraph SPLASH["🟢 /splash — SplashScreen"]
+        S1["Gradient emerald bg"]
+        S2["Islamic geometric pattern"]
+        S3["🏮 Lanterns + 🌙 Crescent"]
+        S4["🕌 Logo + Bismillah"]
+        S5["Title: Manaqib"]
+        S6["Button: Mulai Membaca"]
+        S1 --> S2 --> S3 --> S4 --> S5 --> S6
+    end
+    
+    subgraph HOME_SCR["🏠 / — HomeScreen"]
+        H1["AppBar: 🕌 Manaqib"]
+        H2["Hero Header Card<br/>Gradient + pattern + stats"]
+        H3["Story Circles<br/>🤲 Shalawat | 📿 Dzikir | 🤲 Doa"]
+        H4["Section: Shalawat (3 item)"]
+        H5["Section: Dzikir (3 item)"]
+        H6["Section: Doa (1 item)"]
+        H7["Cards: title + arabic + desc<br/>Left accent bar"]
+        H1 --> H2 --> H3 --> H4 --> H5 --> H6
+    end
+    
+    subgraph SEARCH_SCR["🔍 /search — SearchScreen"]
+        SE1["AppBar: Cari Bacaan"]
+        SE2["Search bar card<br/>Rounded, shadow, clear pill"]
+        SE3["Empty state: decorative icon"]
+        SE4["No results: orange tint"]
+        SE5["Results: accent bar cards<br/>Category badge + arabic"]
+        SE1 --> SE2 --> SE3
+        SE2 --> SE5
+        SE2 --> SE4
+    end
+    
+    subgraph READ_SCR["📖 /reading/:id — ReadingScreen"]
+        R1["AppBar: title + bookmark 🏷"]
+        R2["Popup menu: font, latin, arti, size"]
+        R3["Section indicator<br/>Animated dots + nav arrows"]
+        R4["Section title + ornamental divider"]
+        R5["Arabic text card<br/>Gold corner ornaments ✦"]
+        R6["Latin text (italic)"]
+        R7["Translation card<br/>Left accent + label"]
+        R8["Source note"]
+        R9["Page indicator: gold dots"]
+        R1 --> R2
+        R3 --> R4 --> R5 --> R6 --> R7 --> R8 --> R9
+    end
+    
+    subgraph BOOK_SCR["🔖 /bookmarks — BookmarksScreen"]
+        B1["AppBar: Tersimpan + clear all"]
+        B2["Empty state"]
+        B3["List: Dismissible cards<br/>Swipe to delete + undo"]
+    end
+    
+    subgraph SETTINGS_SCR["⚙️ /settings — SettingsScreen"]
+        ST1["App info card: 🕌 Manaqib"]
+        ST2["Theme: System/Light/Dark"]
+        ST3["Arabic font: Amiri/Scheherazade/Kufi"]
+        ST4["Info: masjid, tentang, ❤️, disclaimer"]
+        ST1 --> ST2 --> ST3 --> ST4
+    end
+
+    style SPLASH fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style HOME_SCR fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SEARCH_SCR fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style READ_SCR fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style BOOK_SCR fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SETTINGS_SCR fill:#5BA4CF,stroke:#D4A843,color:#fff
+</div>
+</div>
+
+<!-- ===== DATA & STATE ===== -->
+<div id="data" class="diagram-container">
+<div class="mermaid">
+graph TB
+    subgraph CONTENT["📦 manaqib_content.dart — Static Data"]
+        direction TB
+        M1["Shalawat Badar<br/>id: 1 — 2 sections"]
+        M2["Shalawat Munjiyat<br/>id: 2 — 1 section"]
+        M3["Shalawat Nariyah<br/>id: 3 — 1 section"]
+        M4["Dzikir Pagi<br/>id: 4 — 2 sections"]
+        M5["Dzikir Petang<br/>id: 5 — 2 sections"]
+        M6["Shalawat Fatih<br/>id: 6 — 1 section"]
+        M7["Doa Setelah Shalat<br/>id: 7 — 2 sections"]
+        M8["Tahlil & Takbir<br/>id: 8 — 3 sections"]
+    end
+    
+    subgraph MODEL["📋 Manaqib Model"]
+        MN["Manaqib<br/>id, title, arabicTitle<br/>description, category, source<br/>validityNote, sections[]"]
+        MS["ManaqibSection<br/>title, arabicText<br/>translation, latinText<br/>sourceNote"]
+        MN --> MS
+    end
+    
+    subgraph CATEGORIES["📂 Categories"]
+        C1["Shalawat 🤲 — 3 items<br/>Color: #1A6B5A"]
+        C2["Dzikir 📿 — 3 items<br/>Color: #5BA4CF"]
+        C3["Doa 🤲 — 1 item<br/>Color: #D4A843"]
+    end
+    
+    subgraph PROVIDER["⚡ Providers"]
+        direction TB
+        TP["ThemeProvider<br/>├ themeModeOption<br/>├ arabicFontOption<br/>└ SharedPreferences"]
+        BP["BookmarkProvider<br/>├ bookmarkedIds: Set&lt;int&gt;<br/>├ toggleBookmark<br/>├ isBookmarked<br/>├ clearAll<br/>└ SharedPreferences"]
+    end
+    
+    subgraph STORAGE["💾 SharedPreferences"]
+        K1["theme_mode: 'system'|'light'|'dark'"]
+        K2["arabic_font: 'amiri'|'scheherazadeNew'|'notoKufiArabic'"]
+        K3["bookmarks: '1,2,3' (comma separated)"]
+    end
+    
+    CONTENT --> MODEL
+    C1 -.-> M1
+    C1 -.-> M2
+    C1 -.-> M6
+    C2 -.-> M4
+    C2 -.-> M5
+    C2 -.-> M8
+    C3 -.-> M3
+    C3 -.-> M7
+    PROVIDER --> STORAGE
+
+    style CONTENT fill:#1A2634,stroke:#D4A843,color:#fff
+    style MODEL fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style CATEGORIES fill:#253341,stroke:#D4A843,color:#fff
+    style PROVIDER fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style STORAGE fill:#083329,stroke:#D4A843,color:#fff
+</div>
+</div>
+
+<!-- ===== DESIGN SYSTEM ===== -->
+<div id="design" class="diagram-container">
+<div class="mermaid">
+graph TB
+    subgraph COLORS["🎨 Color Tokens — AppColors"]
+        direction TB
+        CP["PRIMARY<br/>#0D4B3F Deep Emerald"]
+        CPL["primaryLight #1A6B5A"]
+        CPD["primaryDark #083329"]
+        CG["GOLD #D4A843<br/>Crescent, bookmark,<br/>active nav, ornaments"]
+        CGL["goldLight #E8C96A"]
+        CSB["SKY BLUE #5BA4CF<br/>Stats, Dzikir category"]
+        
+        subgraph LIGHT["Light Theme"]
+            LBG["Background #F8F9FA"]
+            LS["Surface #FFFFFF"]
+            LSV["SurfaceVariant #F0F4F3"]
+            LT1["Text #1A1A2E"]
+            LT2["Text #5C6670"]
+        end
+        
+        subgraph DARK["Dark Theme"]
+            DBG["Background #0F1923"]
+            DS["Surface #1A2634"]
+            DSV["SurfaceVariant #253341"]
+            DT1["Text #E8ECF0"]
+            DT2["Text #9BA5B0"]
+        end
+    end
+    
+    subgraph TYPO["✏️ Typography"]
+        direction TB
+        TH["Headings — Playfair Display<br/>Display: 32/28/24px w700<br/>Headline: 22/20/18px w700<br/>Title: 18/16/15px w700/w600"]
+        TB2["Body — Inter<br/>Body: 16/14px w400<br/>Label: 14/12/11px w600/w500"]
+        TA["Arabic — Selectable<br/>Amiri / Scheherazade New<br/>Noto Kufi Arabic"]
+    end
+    
+    subgraph SHAPES["📐 Shapes & Radius"]
+        R1["Cards: 16px"]
+        R2["Buttons: 12px"]
+        R3["Search bar: 16px"]
+        R4["Dialogs: 20px"]
+        R5["Popup menu: 12px"]
+        R6["Category circles: 16px"]
+    end
+    
+    subgraph COMPONENTS["🧩 Design Components"]
+        direction TB
+        AC["Accent Bar<br/>4px left border<br/>Color-coded per category"]
+        CO["Corner Ornaments ✦<br/>Gold L-shaped<br/>Arabic text card"]
+        OD["Ornamental Divider<br/>Gold star ✦ between lines"]
+        SI["Section Indicator<br/>Animated pill 24px<br/>+ prev/next arrows"]
+        SC["Story Circles<br/>Emoji in tinted rounded box"]
+        SB["Stat Chips<br/>Icon + label<br/>Gold / Sky blue"]
+        EN["Empty States<br/>Decorative circle + icon<br/>+ heading + description"]
+    end
+    
+    subgraph CUSTOMPAINTERS["🖌️ CustomPainters"]
+        direction TB
+        PP["Islamic Pattern Painter<br/>8-pointed star grid"]
+        LP["Lantern Painter<br/>Hook + cap + body + tassel"]
+        CP2["Crescent Moon Painter<br/>Double arc stroke"]
+        SP["Star Painter<br/>5-pointed star fill"]
+        COP["Corner Painter<br/>Gold L-shaped corners"]
+    end
+
+    style COLORS fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style TYPO fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SHAPES fill:#253341,stroke:#D4A843,color:#fff
+    style COMPONENTS fill:#1A2634,stroke:#D4A843,color:#fff
+    style CUSTOMPAINTERS fill:#083329,stroke:#D4A843,color:#fff
+    style LIGHT fill:#F8F9FA,stroke:#D4A843,color:#1A1A2E
+    style DARK fill:#0F1923,stroke:#D4A843,color:#E8ECF0
+</div>
+</div>
+
+<div class="footer">
+    Manaqib App — Masjid Darussa'adah &nbsp;•&nbsp; Flutter + GoRouter + Provider &nbsp;•&nbsp; Generated 2026-05-14
+</div>
+
+<script>
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+        primaryColor: '#0D4B3F',
+        primaryTextColor: '#e8ecf0',
+        primaryBorderColor: '#D4A843',
+        lineColor: '#D4A843',
+        secondaryColor: '#1A6B5A',
+        tertiaryColor: '#253341',
+        fontSize: '13px',
+        fontFamily: 'Segoe UI, system-ui, sans-serif',
+    },
+    flowchart: {
+        curve: 'basis',
+        padding: 16,
+        nodeSpacing: 30,
+        rankSpacing: 40,
+    }
+});
+
+function showTab(id) {
+    document.querySelectorAll('.diagram-container').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

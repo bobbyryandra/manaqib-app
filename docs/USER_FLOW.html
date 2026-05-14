@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manaqib App — User Flow</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0f14;
+    color: #e8ecf0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+  .header {
+    text-align: center;
+    padding: 28px 20px 12px;
+    background: linear-gradient(135deg, #0D4B3F 0%, #083329 100%);
+    border-bottom: 2px solid rgba(212,168,67,0.3);
+  }
+  .header h1 { font-size: 26px; color: #D4A843; font-weight: 700; }
+  .header p { color: rgba(255,255,255,0.45); font-size: 12px; margin-top: 4px; }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(212,168,67,0.15);
+    background: rgba(13,75,63,0.2);
+    color: #9ba5b0;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .tab:hover { border-color: rgba(212,168,67,0.4); color: #e8ecf0; }
+  .tab.active {
+    background: linear-gradient(135deg, #0D4B3F, #1A6B5A);
+    border-color: #D4A843;
+    color: #D4A843;
+  }
+
+  .diagram-container {
+    display: none;
+    padding: 16px;
+    overflow-x: auto;
+  }
+  .diagram-container.active { display: block; }
+  .diagram-container .mermaid { display: flex; justify-content: center; }
+  .diagram-container svg { max-width: 100%; height: auto; }
+
+  .legend {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 16px;
+    display: none;
+  }
+  .legend.active { display: block; }
+  .legend-box {
+    background: rgba(13,75,63,0.15);
+    border: 1px solid rgba(212,168,67,0.15);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #9ba5b0;
+  }
+  .legend-box b { color: #D4A843; }
+  .legend-box span.label {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255,255,255,0.15);
+    font-size: 11px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🕌 Manaqib App — User Flow</h1>
+  <p>Masjid Darussa'adah — Alur lengkap penggunaan aplikasi</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('main', this)">🔵 Main Flow</button>
+  <button class="tab" onclick="showTab('reading', this)">📖 Reading Flow</button>
+  <button class="tab" onclick="showTab('bookmark', this)">🔖 Bookmark Flow</button>
+  <button class="tab" onclick="showTab('settings', this)">⚙️ Settings Flow</button>
+  <button class="tab" onclick="showTab('search', this)">🔍 Search Flow</button>
+</div>
+
+<!-- ===== MAIN FLOW ===== -->
+<div id="main" class="diagram-container active"></div>
+<div id="main-legend" class="legend active">
+<div class="legend-box">
+  <b>🔵 Main Flow</b> — Alur utama dari buka app sampai membaca bacaan<br>
+  <span class="label" style="background:#0D4B3F"></span> Screen utama &nbsp;
+  <span class="label" style="background:#D4A843"></span> Aksi navigasi &nbsp;
+  <span class="label" style="background:#1A6B5A"></span> Bottom nav &nbsp;
+  <span class="label" style="background:#5BA4CF"></span> Sub-flow
+</div>
+</div>
+
+<!-- ===== READING FLOW ===== -->
+<div id="reading" class="diagram-container"></div>
+<div id="reading-legend" class="legend">
+<div class="legend-box">
+  <b>📖 Reading Flow</b> — Alur detail saat membaca bacaan (Shalawat, Dzikir, Doa)<br>
+  Termasuk: navigasi bagian, atur font, toggle latin/arti, bookmark
+</div>
+</div>
+
+<!-- ===== BOOKMARK FLOW ===== -->
+<div id="bookmark" class="diagram-container"></div>
+<div id="bookmark-legend" class="legend">
+<div class="legend-box">
+  <b>🔖 Bookmark Flow</b> — Alur simpan, lihat, hapus bacaan tersimpan<br>
+  Termasuk: swipe to delete, undo snackbar, clear all
+</div>
+</div>
+
+<!-- ===== SETTINGS FLOW ===== -->
+<div id="settings" class="diagram-container"></div>
+<div id="settings-legend" class="legend">
+<div class="legend-box">
+  <b>⚙️ Settings Flow</b> — Alur ubah tampilan, font arab, info aplikasi<br>
+  Semua setting tersimpan di SharedPreferences (persistent)
+</div>
+</div>
+
+<!-- ===== SEARCH FLOW ===== -->
+<div id="search" class="diagram-container"></div>
+<div id="search-legend" class="legend">
+<div class="legend-box">
+  <b>🔍 Search Flow</b> — Alur cari bacaan berdasarkan judul, latin, atau arti<br>
+  Search mencakup: title, arabicTitle, description, category, arabicText, translation, latinText
+</div>
+</div>
+
+<div class="footer">
+  Manaqib App — Masjid Darussa'adah &nbsp;•&nbsp; User Flow Document &nbsp;•&nbsp; 2026-05-14
+</div>
+
+<script>
+// ====== Mermaid Definitions ======
+
+const diagrams = {
+
+// ==================== MAIN FLOW ====================
+main: `
+graph TD
+    START((📱 Buka App)) --> SPLASH["🟢 /splash<br/>SplashScreen"]
+
+    SPLASH --> SPLASH_ANIM{"Animasi 2.4s<br/>Logo + Bismillah + Title"}
+    SPLASH_ANIM -->|"Auto / Tap 'Mulai Membaca'"| HOME
+
+    subgraph SHELL["🧭 MainShell — Bottom Navigation"]
+        direction LR
+        NAV_H["🕌 Beranda"]
+        NAV_S["🔍 Cari"]
+        NAV_B["🔖 Tersimpan"]
+        NAV_ST["⚙️ Setelan"]
+    end
+
+    subgraph HOME_SCREEN["🏠 / — HomeScreen"]
+        direction TB
+        HOME_APP["AppBar: 🕌 Manaqib"]
+        HOME_HERO["Hero Card: Assalamu'alaikum<br/>8 Bacaan Tersedia<br/>X Tersimpan"]
+        HOME_CIRCLES["Story Circles<br/>🤲 Shalawat · 📿 Dzikir · 🤲 Doa"]
+        HOME_SEC1["Section: Shalawat (3 item)"]
+        HOME_SEC2["Section: Dzikir (3 item)"]
+        HOME_SEC3["Section: Doa (1 item)"]
+        HOME_CARDS["Content Cards<br/>Title + Arabic + Description<br/>Left accent bar"]
+        HOME_APP --> HOME_HERO --> HOME_CIRCLES
+        HOME_CIRCLES --> HOME_SEC1 --> HOME_SEC2 --> HOME_SEC3
+    end
+
+    HOME["🏠 HomeScreen"] <--> SHELL
+    SHELL -->|"/"| HOME
+    HOME --> HOME_SCREEN
+
+    HOME_SCREEN -->|"Pull down"| HOME_REFRESH["RefreshIndicator<br/>Reload bookmarks"]
+
+    SHELL -->|"/search"| SEARCH["🔍 SearchScreen"]
+    SHELL -->|"/bookmarks"| BOOKMARK["🔖 BookmarksScreen"]
+    SHELL -->|"/settings"| SETTINGS["⚙️ SettingsScreen"]
+
+    HOME_SCREEN -->|"Tap content card"| READ["📖 /reading/:id"]
+    HOME_SCREEN -->|"Tap 📿 Dzikir"| READ
+    HOME_SCREEN -->|"Tap 🤲 Doa"| READ
+
+    READ -->|"← Back"| PREV{"Dari mana?"}
+    PREV -->|"Home"| HOME
+    PREV -->|"Search"| SEARCH
+    PREV -->|"Bookmarks"| BOOKMARK
+
+    style START fill:#1A6B5A,stroke:#D4A843,color:#fff,stroke-width:2px
+    style SPLASH fill:#0D4B3F,stroke:#D4A843,color:#fff,stroke-width:2px
+    style HOME fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SEARCH fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style BOOKMARK fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style SETTINGS fill:#5BA4CF,stroke:#D4A843,color:#fff
+    style READ fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F,stroke-width:2px
+    style SHELL fill:#083329,stroke:#D4A843,color:#fff
+    style HOME_SCREEN fill:#1A2634,stroke:#253341,color:#e8ecf0
+    style SPLASH_ANIM fill:#253341,stroke:#D4A843,color:#D4A843
+    style PREV fill:#253341,stroke:#D4A843,color:#D4A843
+`,
+
+// ==================== READING FLOW ====================
+reading: `
+graph TB
+    ENTRY(("📖 Masuk ReadingScreen")) --> LOAD["Load Manaqib by ID<br/>from manaqibList"]
+
+    LOAD -->|"ID tidak ditemukan"| NOT_FOUND["❌ 'Tidak Ditemukan'<br/>AppBar + body error"]
+    LOAD -->|"ID ditemukan"| RENDER["Render ReadingScreen"]
+
+    subgraph APPBAR_TOP["AppBar Actions"]
+        TITLE["Title: nama bacaan"]
+        BK{"Sudah di-bookmark?"}
+        BK -->|"Ya"| BK_ON["🏷️ Bookmark (gold)"]
+        BK -->|"Belum"| BK_OFF["🏷️ Bookmark (outline)"]
+        MENU["⋮ Popup Menu"]
+    end
+
+    RENDER --> APPBAR_TOP
+
+    subgraph SECTIONS["Content — PageView"]
+        direction TB
+        SEC_NAV["Section Indicator<br/>Animated dots + ◀ ▶"]
+        SEC_TITLE["Section Title<br/>(if > 1 section)"]
+        SEC_DIV["✦ Ornamental Divider"]
+        SEC_ARAB["Arabic Text Card<br/>Gold corner ornaments ✦"]
+        SEC_LATIN{"Latin tampil?<br/>(toggle)"}
+        SEC_TRANS{"Arti tampil?<br/>(toggle)"}
+        SEC_SOURCE{"Source Note<br/>(if ada)"}
+        SEC_PAGE["Page indicator<br/>✦ 1 dari 3 bagian ✦"]
+        SEC_NAV --> SEC_TITLE --> SEC_DIV --> SEC_ARAB
+        SEC_ARAB --> SEC_LATIN
+        SEC_LATIN -->|".withValues(alpha: true)"| SEC_TRANS
+        SEC_LATIN -->|"false"| SEC_SOURCE
+        SEC_TRANS -->|"true"| SEC_SOURCE
+        SEC_SOURCE --> SEC_PAGE
+    end
+
+    RENDER --> SECTIONS
+
+    subgraph INTERACTIONS["Gestures & Actions"]
+        direction TB
+        SWIPE["Swipe ←/→<br/>Pindah bagian"]
+        TAP_NAV["Tap ◀ ▶ arrow<br/>Pindah bagian"]
+        TAP_BK["Tap bookmark icon<br/>Toggle bookmark"]
+        TAP_MENU["Tap ⋮ menu"]
+        SWIPE_HINT{"Bagian pertama?"}
+        SWIPE -->|"Next section"| SEC_NAV
+        TAP_NAV --> SEC_NAV
+        TAP_BK --> BK
+        TAP_MENU --> MENU
+        SWIPE_HINT -->|"Ya"| ANIM_HINT["Animated swipe hint<br/>(nudge left 20px)"]
+    end
+
+    INTERACTIONS --> SECTIONS
+
+    subgraph POPUP["⋮ Popup Menu Options"]
+        direction TB
+        M_FONT["Font Arab: header + pilihan"]
+        M_AMIRI["  ○ Amiri"]
+        M_SCHE["  ○ Scheherazade New"]
+        M_KUFI["  ○ Noto Kufi Arabic"]
+        M_LATIN["☐ Tampilin teks latin"]
+        M_ARTI["☐ Tampilin arti bahasa"]
+        M_UP["⬆️ Huruf lebih besar<br/>(+2px, max 36)"]
+        M_DOWN["⬇️ Huruf lebih kecil<br/>(-2px, min 16)"]
+        M_FONT --> M_AMIRI
+        M_AMIRI --> M_SCHE --> M_KUFI
+    end
+
+    MENU --> POPUP
+
+    POPUP -->|"Ubah font"| APPLY_FONT["Apply ArabicFontOption<br/>Simpan ke SharedPreferences"]
+    POPUP -->|"Toggle latin"| TOGGLE_LATIN["Toggle _showLatin<br/>Rebuild content"]
+    POPUP -->|"Toggle arti"| TOGGLE_TRANS["Toggle _showTranslation<br/>Rebuild content"]
+    POPUP -->|"Ubah ukuran"| RESIZE["Adjust _fontSize<br/>clamp 16-36px"]
+
+    style ENTRY fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F,stroke-width:2px
+    style NOT_FOUND fill:#8B0000,stroke:#ff4444,color:#fff
+    style RENDER fill:#0D4B3F,stroke:#D4A843,color:#fff,stroke-width:2px
+    style SECTIONS fill:#1A2634,stroke:#253341,color:#e8ecf0
+    style APPBAR_TOP fill:#253341,stroke:#D4A843,color:#D4A843
+    style INTERACTIONS fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style POPUP fill:#083329,stroke:#D4A843,color:#fff
+    style BK fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style BK_ON fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style BK_OFF fill:#253341,stroke:#D4A843,color:#D4A843
+`,
+
+// ==================== BOOKMARK FLOW ====================
+bookmark: `
+graph TB
+    ENTRY(("🔖 Masuk Bookmark Flow")) --> CHECK{"Dari mana?"}
+
+    CHECK -->|"HomeScreen"| HOME_BK["Tap 🏷️ bookmark icon<br/>di AppBar ReadingScreen"]
+    CHECK -->|"BookmarksScreen"| LIST["List bacaan tersimpan"]
+    CHECK -->|"ReadingScreen"| READ_BK["Tap 🏷️ icon"]
+
+    HOME_BK --> TOGGLE["BookmarkProvider<br/>toggleBookmark(id)"]
+    READ_BK --> TOGGLE
+
+    TOGGLE --> TOGGLE_CHECK{"Sudah bookmark?"}
+    TOGGLE_CHECK -->|"Ya"| REMOVE["removeBookmark(id)<br/>Hapus dari list"]
+    TOGGLE_CHECK -->|"Tidak"| ADD["Tambah ke list<br/>Simpan SharedPreferences"]
+
+    REMOVE -->|"Icon → outline"| REMOVE_UI["UI update: bookmark hilang"]
+    ADD -->|"Icon → gold"| ADD_UI["UI update: bookmark muncul + gold"]
+    ADD --> SHOW_SNACK["SnackBar: 'Bacaan disimpan'"]
+
+    subgraph BOOKMARKS_SCREEN["🔖 /bookmarks — BookmarksScreen"]
+        direction TB
+        BS_APP["AppBar: Tersimpan + ⋮ menu"]
+        BS_EMPTY{"Ada bookmark?"}
+        BS_EMPTY -->|"Tidak"| BS_EMPT_STATE["📌 Empty State<br/>'Belum ada bacaan yang disimpan'<br/>'Tap ikon 🔖 di halaman bacaan'"]
+        BS_EMPTY -->|"Ya"| BS_LIST["ListView: Dismissible cards<br/>Category badge + title + arabic"]
+        BS_APP --> BS_EMPTY
+
+        BS_LIST --> TAP_ITEM["Tap card → /reading/:id"]
+        BS_LIST --> SWIPE["Swipe kanan ←<br/>(Dismissible)"]
+        SWIPE --> SWIPE_BG["🔴 Red background<br/>Delete icon"]
+        SWIPE -->|"Confirm"| DELETE_ONE["removeBookmark(id)"]
+        DELETE_ONE --> UNDO_SNACK["SnackBar: 'X udah dihapus'<br/>+ Tombol 'Kembalikan'"]
+
+        UNDO_SNACK -->|"Tap Kembalikan"| UNDO["toggleBookmark(id)"]
+        UNDO_SNACK -->|"Ignore"| DELETED{"Bookmark list kosong?"}
+        DELETED -->|"Ya"| BS_EMPT_STATE
+        DELETED -->|"Masih ada"| BS_LIST
+
+        BS_APP --> MENU_CLEAR["⋮ → Hapus Semua Tersimpan"]
+        MENU_CLEAR --> DIALOG["AlertDialog<br/>'Hapus Semua? Yakin lanjut?'"]
+        DIALOG -->|"Batal"| BOOKMARKS_SCREEN
+        DIALOG -->|"Yakin, Hapus"| CLEAR["clearAll()<br/>Hapus semua data"]
+        CLEAR --> BS_EMPT_STATE
+    end
+
+    ADD_UI --> BOOKMARKS_SCREEN
+    REMOVE_UI --> BOOKMARKS_SCREEN
+
+    style ENTRY fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F,stroke-width:2px
+    style TOGGLE fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style ADD fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style REMOVE fill:#8B0000,stroke:#ff4444,color:#fff
+    style ADD_UI fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style REMOVE_UI fill:#8B0000,stroke:#ff4444,color:#fff
+    style BOOKMARKS_SCREEN fill:#1A2634,stroke:#253341,color:#e8ecf0
+    style DIALOG fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style CLEAR fill:#8B0000,stroke:#ff4444,color:#fff
+    style BS_EMPT_STATE fill:#253341,stroke:#5BA4CF,color:#5BA4CF
+`,
+
+// ==================== SETTINGS FLOW ====================
+settings: `
+graph TB
+    ENTRY(("⚙️ Masuk SettingsScreen")) --> RENDER["Render Settings"]
+
+    subgraph SETTINGS["⚙️ /settings — SettingsScreen"]
+        direction TB
+        S_INFO["App Info Card<br/>🕌 Manaqib<br/>Masjid Darussa'adah<br/>Versi 1.0.0"]
+
+        subgraph THEME_SEC["Tampilan Layar"]
+            TH{"Pilihan theme?"}
+            TH_SYS["radio ◉ Ikuti HP<br/>'Otomatis gelap kalau HP gelap'"]
+            TH_LIT["radio ○ Selalu Terang<br/>'Cocok buat siang hari'"]
+            TH_DRK["radio ○ Selalu Gelap<br/>'Nyaman buat baca malam'"]
+        end
+
+        subgraph FONT_SEC["Font Teks Arab"]
+            FT{"Pilihan font?"}
+            FT_AM["radio ◉ Amiri<br/>'Klasik, harakat akurat'<br/>Preview: بِسْمِ اللّٰهِ"]
+            FT_SC["radio ○ Scheherazade New<br/>'Mirip Mushaf, elegan'<br/>Preview: بِسْمِ اللّٰهِ"]
+            FT_KU["radio ○ Noto Kufi Arabic<br/>'Gaya Kufi, modern'<br/>Preview: بِسْمِ اللّٰهِ"]
+        end
+
+        subgraph ABOUT_SEC["Info Aplikasi"]
+            AB1["🕌 Masjid Darussa'adah"]
+            AB2["ℹ️ Tentang Aplikasi Ini"]
+            AB3["❤️ Dibuat dengan ❤️"]
+            AB4["📜 Sumber & Disclaimer → /disclaimer"]
+        end
+    end
+
+    RENDER --> S_INFO --> THEME_SEC --> FONT_SEC --> ABOUT_SEC
+
+    THEME_SEC -->|"Tap radio"| CHANGE_THEME["ThemeProvider.setThemeMode(mode)"]
+    CHANGE_THEME --> SAVE_THEME["SharedPreferences<br/>key: 'theme_mode'<br/>value: 'system'|'light'|'dark'"]
+    SAVE_THEME --> REBUILD["Theme.of(context) rebuild<br/>Semua screen update otomatis"]
+
+    FONT_SEC -->|"Tap radio"| CHANGE_FONT["ThemeProvider.setArabicFont(font)"]
+    CHANGE_FONT --> SAVE_FONT["SharedPreferences<br/>key: 'arabic_font'<br/>value: 'amiri'|'scheherazadeNew'|'notoKufiArabic'"]
+    SAVE_FONT --> FONT_PREVIEW["Update preview + ReadingScreen<br/>Font Arabic langsung berubah"]
+
+    ABOUT_SEC -->|"Tap 'Sumber & Disclaimer'"| DISCLAIMER["📜 /disclaimer<br/>DisclaimerScreen"]
+
+    DISCLAIMER -->|"← Back"| SETTINGS
+
+    subgraph DISCLAIMER_SCREEN["📜 /disclaimer — DisclaimerScreen"]
+        direction TB
+        D_HEADER["Header: Sumber Konten & Disclaimer"]
+        D_QURAN["📖 Sumber Konten Al-Quran"]
+        D_SHAL["🤲 Sumber Shalawat"]
+        D_DZIK["📿 Sumber Dzikir & Doa"]
+        D_LATIN["🔤 Ketentuan Teks Latin"]
+        D_VALID["⚠️ Validasi & Keterbatasan"]
+        D_DESIGN["🎨 Referensi Desain UI/UX"]
+        D_TECH["⚙️ Teknologi"]
+        D_OFFICIAL["📜 Disclaimer Resmi"]
+        D_VERSION["Versi 1.0.0 • 2026"]
+    end
+
+    DISCLAIMER --> DISCLAIMER_SCREEN
+
+    style ENTRY fill:#5BA4CF,stroke:#D4A843,color:#fff,stroke-width:2px
+    style RENDER fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style SETTINGS fill:#1A2634,stroke:#253341,color:#e8ecf0
+    style THEME_SEC fill:#253341,stroke:#D4A843,color:#D4A843
+    style FONT_SEC fill:#253341,stroke:#D4A843,color:#D4A843
+    style ABOUT_SEC fill:#253341,stroke:#D4A843,color:#D4A843
+    style CHANGE_THEME fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SAVE_THEME fill:#083329,stroke:#D4A843,color:#fff
+    style REBUILD fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style CHANGE_FONT fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style SAVE_FONT fill:#083329,stroke:#D4A843,color:#fff
+    style FONT_PREVIEW fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F
+    style DISCLAIMER fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F,stroke-width:2px
+    style DISCLAIMER_SCREEN fill:#1A2634,stroke:#253341,color:#e8ecf0
+`,
+
+// ==================== SEARCH FLOW ====================
+search: `
+graph TB
+    ENTRY(("🔍 Masuk SearchScreen")) --> RENDER["Render SearchScreen"]
+
+    subgraph SEARCH["🔍 /search — SearchScreen"]
+        direction TB
+        S_APP["AppBar: 🔍 Cari Bacaan"]
+        S_BAR["Search Bar Card<br/>Rounded 16px + shadow"]
+        S_INPUT["TextField: autofocus<br/>'Judul, latin, atau arti...'"]
+        S_CLEAR{"Query kosong?"}
+        S_EMPTY["Empty State<br/>🔍 decorative circle<br/>'Cari Bacaan'<br/>'Ketik judul, teks latin...'"]
+        S_RESULTS{"Ada hasil?"}
+        S_NO_RES["No Results<br/>🟠 orange circle<br/>'Tidak Ditemukan'<br/>'Coba kata kunci lain'"]
+        S_LIST["Result ListView<br/>Accent bar cards"]
+        S_COUNT{"Jumlah hasil"}
+    end
+
+    RENDER --> S_APP --> S_BAR --> S_INPUT
+    S_INPUT -->|"Ketik sesuatu"| SEARCH_DO["setState(query = value)"]
+    SEARCH_DO --> FILTER["Filter manaqibList:<br/>• title.toLowerCase()<br/>• arabicTitle<br/>• description<br/>• category<br/>• section.arabicText<br/>• section.translation<br/>• section.latinText"]
+    FILTER --> S_RESULTS
+    S_INPUT -->|"Kosong"| S_CLEAR
+    S_CLEAR -->|"Ya"| S_EMPTY
+    S_RESULTS -->|"Tidak ada"| S_NO_RES
+    S_RESULTS -->|"Ada"| S_LIST
+    S_LIST -->|"Tap result card"| NAV_READ["context.push('/reading/id')"]
+    S_LIST -->|"Tap card"| RESULT_CARD["Card: accent bar<br/>Category badge (color-coded)<br/>Title + arabic<br/>'X bagian'"]
+
+    subgraph CLEAR_FLOW["Clear Search"]
+        C_TAP["Tap clear pill button ✕"]
+        C_CLEAR["_searchController.clear()"]
+        C_FOCUS["_focusNode.requestFocus()"]
+        C_RESET["setState(query = '')"]
+    end
+
+    S_BAR -->|"Query != empty"| CLEAR_FLOW
+    CLEAR_FLOW -->|"Reset"| S_EMPTY
+
+    subgraph EXAMPLE["Contoh Pencarian"]
+        E1["'shalawat' → 3 hasil<br/>(Shalawat Badar, Munjiyat, Fatih)"]
+        E2["'pagi' → 1 hasil<br/>(Dzikir Pagi)"]
+        E3["'ن' → 6+ hasil<br/>(semua ada ن di arabic)"]
+        E4["'pertolongan' → 1 hasil<br/>(Shalawat Badar — di translation)"]
+    end
+
+    FILTER -.-> EXAMPLE
+
+    NAV_READ --> READ_TARGET["📖 /reading/:id<br/>ReadingScreen"]
+    READ_TARGET -->|"← Back"| SEARCH
+
+    style ENTRY fill:#5BA4CF,stroke:#D4A843,color:#fff,stroke-width:2px
+    style RENDER fill:#0D4B3F,stroke:#D4A843,color:#fff
+    style SEARCH fill:#1A2634,stroke:#253341,color:#e8ecf0
+    style FILTER fill:#1A6B5A,stroke:#D4A843,color:#fff
+    style CLEAR_FLOW fill:#083329,stroke:#D4A843,color:#fff
+    style READ_TARGET fill:#D4A843,stroke:#0D4B3F,color:#0D4B3F,stroke-width:2px
+    style EXAMPLE fill:#253341,stroke:#D4A843,color:#D4A843
+    style S_NO_RES fill:#8B4513,stroke:#D4A843,color:#fff
+`
+};
+
+// ====== Render ======
+Object.keys(diagrams).forEach(id => {
+    document.getElementById(id).innerHTML =
+        '<div class="mermaid">' + diagrams[id] + '</div>';
+});
+
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+        primaryColor: '#0D4B3F',
+        primaryTextColor: '#e8ecf0',
+        primaryBorderColor: '#D4A843',
+        lineColor: '#D4A843',
+        secondaryColor: '#1A6B5A',
+        tertiaryColor: '#253341',
+        fontSize: '12px',
+        fontFamily: 'Segoe UI, system-ui, sans-serif',
+    },
+    flowchart: {
+        curve: 'basis',
+        padding: 14,
+        nodeSpacing: 25,
+        rankSpacing: 35,
+        htmlLabels: true,
+    }
+});
+
+function showTab(id, el) {
+    document.querySelectorAll('.diagram-container').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.legend').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(d => d.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById(id + '-legend').classList.add('active');
+    el.classList.add('active');
+}
+</script>
+
+</body>
+</html>

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../theme/theme_data.dart';
 
 class DisclaimerScreen extends StatelessWidget {
   const DisclaimerScreen({super.key});
@@ -7,9 +9,24 @@ class DisclaimerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sumber & Disclaimer'),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.gavel_rounded, size: 22, color: AppColors.gold),
+            const SizedBox(width: 8),
+            Text(
+              'Sumber & Disclaimer',
+              style: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.gold : Colors.white,
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: ListView(
@@ -93,6 +110,67 @@ class DisclaimerScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
+          // Sumber Waktu Sholat
+          _buildSection(
+            context,
+            icon: Icons.access_time_rounded,
+            title: '🕌 Sumber Jadwal Sholat',
+            items: [
+              'API Aladhan.com — Islamic Prayer Times',
+              'Metode perhitungan: Umm Al-Qura (Makkah)',
+              '12 kota Indonesia built-in',
+              'GPS auto-detect — Geolocator plugin',
+              'Fallback estimasi khatulistiwa (offline)',
+              'Cache per-hari untuk mengurangi API call',
+            ],
+            note:
+                'Jadwal sholat diambil dari API Aladhan.com yang merupakan penyedia jadwal sholat Islam gratis dan terpercaya. Metode perhitungan default menggunakan standar Umm Al-Qura University, Makkah. Akurasi ± 2 menit. Untuk lokasi yang tidak terdeteksi, default ke Jakarta. Semua waktu bersifat estimasi — selalu konfirmasi dengan jadwal resmi masjid setempat.',
+          ),
+          const SizedBox(height: 16),
+
+          // Sumber Tawasul
+          _buildSection(
+            context,
+            icon: Icons.mosque,
+            title: '🕌 Sumber Bacaan Tawasul',
+            items: [
+              'Tawasul — bacaan pembuka sebelum Manaqib',
+              'Tradisi Thoriqoh Qodiriyyah — Syekh Abdul Qadir Al-Jailani',
+              'Shalawat pengantar bersumber dari kitab Dalailul Khairat',
+              'Tawasul melalui Nabi & para ulama salaf',
+              'Konsep tawasul berdasarkan Al-Quran (QS. Al-Ma\'idah: 35)',
+              'Shalawat Munjiyat — Imam Al-Jazuli, Dalailul Khairat',
+              'Doa Rabbanaa — Al-Quran Surah Al-Baqarah: 201',
+              'Penutup shalawat — HR. Tirmidzi',
+            ],
+            note:
+                'Bacaan Tawasul ini merupakan tradisi yang umum dibaca oleh jamaah manaqib sebelum membaca Manaqib Syekh Abdul Qadir Al-Jailani (w. 561 H/1166 M). Syekh Abdul Qadir Al-Jailani adalah pendiri Thoriqoh Qodiriyyah, salah satu thoriqoh terbesar dalam Islam. Konsep tawasul (mengambil perantara) kepada Allah melalui Nabi, para ulama, dan amal saleh merupakan hal yang dibenarkan oleh mayoritas ulama, sebagaimana ditunjukkan oleh dalil dari Al-Quran, Sunnah, dan amalan para sahabat.',
+          ),
+          const SizedBox(height: 16),
+
+          // Sumber Manaqib Syekh Abdul Qadir Al-Jailani
+          _buildSection(
+            context,
+            icon: Icons.auto_stories,
+            title: '📖 Sumber Manaqib Syekh Abdul Qadir Al-Jailani',
+            items: [
+              'Kitab Al-Fuyudhat Ar-Rabbaniyyah — Syekh Abdul Qadir Al-Jailani',
+              'Kitab Futuh Al-Ghaib — Syekh Abdul Qadir Al-Jailani',
+              'Thoriqoh Qodiriyyah — didirikan w. 561 H/1166 M di Baghdad',
+              'Pujian kepada Allah (hamdalah, naat, dzikir)',
+              'Shalawat kepada Nabi Muhammad SAW (madih)',
+              'Sanjungan kepada Syekh Abdul Qadir Al-Jailani (Quthb Aulia)',
+              'Istighfar Agung — HR. Bukhari no. 6307, Muslim no. 2702',
+              'Doa penolak bala — HR. Abu Dawud no. 1556, Tirmidzi no. 3388',
+              'Doa Rabbanaa — Al-Quran Surah Al-Ma\'idah: 114, Al-Baqarah: 201',
+              'Penutup — Surah Ash-Shaffat ayat 180-182',
+              'Shalawat penutup — pola bilangan tak terhingga',
+            ],
+            note:
+                'Manaqib Syekh Abdul Qadir Al-Jailani (470-561 H/1077-1166 M) adalah bacaan yang umum dibaca di majelis-majelis dzikir di Indonesia, khususnya oleh pengikut Thoriqoh Qodiriyyah. Syekh Abdul Qadir lahir di Jailan (Kurdistan) dan wafat di Baghdad. Beliau dikenal sebagai Quthb Aulia (Kutub Para Wali) dan termasuk ulama besar yang memiliki banyak murid dari berbagai penjuru dunia Islam. Teks manaqib yang dibaca di berbagai majelis merupakan kumpulan dari nasihat-nasihat beliau dalam kitab Al-Fuyudhat Ar-Rabbaniyyah (Karunia-karunia Ilahi) dan Futuh Al-Ghaib (Pembukaan Ghaib) yang kemudian disusun menjadi nadzam (syair) oleh para ulama pengikut beliau.',
+          ),
+          const SizedBox(height: 16),
+
           // Sumber Teks Latin
           _buildSection(
             context,
@@ -159,6 +237,7 @@ class DisclaimerScreen extends StatelessWidget {
               'Google Fonts — Typography service',
               'Provider — State management',
               'GoRouter — Declarative routing',
+              'Geolocator — GPS location',
               'SharedPreferences — Local storage',
             ],
             note:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../theme/theme_data.dart';
 import '../theme/theme_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,9 +13,24 @@ class SettingsScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final themeProvider = context.watch<ThemeProvider>();
 
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Setelan'),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.settings_rounded, size: 22, color: AppColors.gold),
+            const SizedBox(width: 8),
+            Text(
+              'Setelan',
+              style: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.gold : Colors.white,
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: ListView(

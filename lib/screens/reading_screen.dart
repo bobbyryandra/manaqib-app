@@ -153,6 +153,24 @@ class _ReadingScreenState extends State<ReadingScreen>
             },
             itemBuilder: (context) => [
               _buildFontMenuSection(theme, arabicFont),
+              _buildFontItem(
+                'font_amiri',
+                ArabicFontOption.amiri,
+                arabicFont == ArabicFontOption.amiri,
+                theme,
+              ),
+              _buildFontItem(
+                'font_scheherazade',
+                ArabicFontOption.scheherazadeNew,
+                arabicFont == ArabicFontOption.scheherazadeNew,
+                theme,
+              ),
+              _buildFontItem(
+                'font_kufi',
+                ArabicFontOption.notoKufiArabic,
+                arabicFont == ArabicFontOption.notoKufiArabic,
+                theme,
+              ),
               const PopupMenuDivider(),
               _buildToggleItem(
                 'latin',
@@ -437,6 +455,39 @@ class _ReadingScreenState extends State<ReadingScreen>
                 fontWeight: FontWeight.w700,
                 color: theme.colorScheme.primary,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  PopupMenuItem<String> _buildFontItem(
+    String value,
+    ArabicFontOption font,
+    bool isSelected,
+    ThemeData theme,
+  ) {
+    return PopupMenuItem(
+      value: value,
+      child: Row(
+        children: [
+          Icon(
+            isSelected
+                ? Icons.radio_button_checked_rounded
+                : Icons.radio_button_unchecked_rounded,
+            size: 20,
+            color: isSelected ? AppColors.primary : null,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(font.label),
+          ),
+          Text(
+            font.description,
+            style: TextStyle(
+              fontSize: 11,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
             ),
           ),
         ],

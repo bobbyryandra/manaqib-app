@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../data/manaqib_content.dart';
 import '../services/bookmark_provider.dart';
+import '../theme/theme_data.dart';
 import '../theme/theme_provider.dart';
 
 class BookmarksScreen extends StatelessWidget {
@@ -15,13 +16,28 @@ class BookmarksScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final arabicFont = context.watch<ThemeProvider>().arabicFontOption;
 
-    final bookmarked = manaqibList
+    final bookmarked = allManaqibList
         .where((m) => bookmarkProvider.isBookmarked(m.id))
         .toList();
 
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tersimpan'),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.bookmark_rounded, size: 22, color: AppColors.gold),
+            const SizedBox(width: 8),
+            Text(
+              'Tersimpan',
+              style: GoogleFonts.playfairDisplay(
+                fontWeight: FontWeight.w700,
+                color: isDark ? AppColors.gold : Colors.white,
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
         actions: [
           if (bookmarked.isNotEmpty)

@@ -1,4 +1,5 @@
 import '../models/manaqib.dart';
+import 'maulid_qasidah_content.dart';
 
 final List<Manaqib> manaqibList = [
   Manaqib(
@@ -187,4 +188,183 @@ final List<Manaqib> manaqibList = [
       ),
     ],
   ),
+  // ─── TAWASUL ──────────────────────────────────────────────────────
+  Manaqib(
+    id: 9,
+    title: 'Tawasul (Pembukaan Manaqib)',
+    arabicTitle: 'التوسل',
+    description: 'Bacaan tawasul yang dibaca sebelum membaca Manaqib Syekh Abdul Qadir Al-Jailani.',
+    category: 'Tawasul',
+    source: 'Kitab Manaqib Syekh Abdul Qadir Al-Jailani',
+    validityNote: 'Tawasul ini merupakan bacaan pembuka yang umum dibaca oleh jamaah manaqib sebelum membaca Manaqib Syekh Abdul Qadir Al-Jailani. Isinya memuat pujian kepada Allah, shalawat Nabi, dan wasilah melalui para ulama salaf.',
+    sections: [
+      ManaqibSection(
+        title: 'Istiftah — Hamdalah',
+        arabicText: 'اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِيْنَ، وَالصَّلَاةُ وَالسَّلَامُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِيْنَ',
+        translation: 'Segala puji bagi Allah Tuhan seluruh alam. Shalawat dan salam sejahtera semoga tetap tercurahkan kepada junjungan kita Nabi Muhammad, serta kepada keluarga dan seluruh sahabat beliau.',
+        latinText: 'Alhamdulillahi rabbil \'aalamiin, wash-shalaatu was-salaamu \'ala sayyidinaa Muhammad wa \'ala aalihi wa shahbihi ajma\'iin.',
+        sourceNote: 'Pembukaan umum yang diajarkan Rasulullah SAW — HR. Bukhari no. 263',
+      ),
+      ManaqibSection(
+        title: 'Shalawat Tawassul',
+        arabicText: 'اَللّٰهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَّاةً تُنْجِيْنَا بِهَا مِنْ جَمِيْعِ الْأَحْوَالِ وَالْآفَاتِ، وَتَقْضِيْ لَنَا بِهَا جَمِيْعَ الْحَوَائِجِ، وَتُطَهِّرُنَا بِهَا مِنْ جَمِيْعِ السَّيِّئَاتِ، وَتَرْفَعُنَا بِهَا عِنْدَكَ أَعْلَى الدَّرَجَاتِ، وَتُبَلِّغُنَا بِهَا أَقْصَى الْغَايَاتِ مِنْ جَمِيْعِ الْخَيْرَاتِ فِي الْحَيَاةِ وَبَعْدَ الْمَمَاتِ، وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِيْنَ',
+        translation: 'Ya Allah, berikanlah shalawat dan salam kepada junjungan kita Nabi Muhammad, shalawat yang dengan sebabnya kami diselamatkan dari segala keadaan sulit dan bencana, terpenuhi segala kebutuhan kami, disucikan dari segala keburukan, diangkat ke derajat tertinggi di sisi-Mu, dan diantarkan kepada tujuan tertinggi dari segala kebaikan baik di dunia maupun akhirat. Dan kepada keluarga serta seluruh sahabat beliau.',
+        latinText: 'Allahumma shalli wasallim \'ala sayyidinaa Muhammad shalawatan tunjiinaa bihaa min jamii\'il ahwaali wal aafaati, wa taqdhiina bihaa jamii\'al hawaa-iji, wa tuthahhirunaa bihaa min jamii\'is sayyiaati, wa tarfa\'unaa bihaa \'indaka a\'lad-darajaati, wa tuballighunaa bihaa aqshal ghayaati min jamii\'il khoyraati fil hayaati wa ba\'dal mamaati, wa \'ala aalihi wa shahbihi ajma\'iin.',
+        sourceNote: 'Merupakan shalawat yang kerap dibaca sebagai pengantar dalam majelis manaqib, bersumber dari tradisi ulama Thoriqoh Qodiriyyah.',
+      ),
+      ManaqibSection(
+        title: 'Tawasul — Mengingat Allah',
+        arabicText: 'اَللّٰهُمَّ إِنَّكَ مَنْ تَعَبَّدَ لَكَ بِمَعْرِفَتِهِ أَغْنَيْتَهُ عَنْ مَعْرِفَةِ مَا سِوَاكَ، وَمَنْ عَبَدَكَ بِالرَّغْبَةِ إِلَيْكَ أَعْطَيْتَهُ مَا أَرَادَ، وَمَنْ عَبَدَكَ بِالرَّهْبَةِ مِنْكَ نَجَّيْتَهُ مِمَّا يَحْذَرُ',
+        translation: 'Ya Allah, sesungguhnya siapa yang beribadah kepada-Mu dengan mengenal-Mu, Engkau telah mencukupkannya dari mengenal selain-Mu. Dan siapa yang beribadah kepada-Mu dengan rindu kepada-Mu, Engkau telah memberikan apa yang ia inginkan. Dan siapa yang beribadah kepada-Mu dengan rasa takut kepada-Mu, Engkau telah menyelamatkannya dari segala yang ia khawatirkan.',
+        latinText: 'Allahumma innaka man ta\'abbada laka bi ma\'rifatihi aghnaitahu \'an ma\'rifati maa siwaaka, wa man \'abadaka bir-raghbati ilaika a\'thaitahu maa araada, wa man \'abadaka bir-rahbati minka najjaitahu mimmaa yahdhar.',
+        sourceNote: 'Bacaan tawasul yang menunjukkan kebesaran Allah, bersumber dari wirid ulama salaf.',
+      ),
+      ManaqibSection(
+        title: 'Tawasul — Wasilah Para Ulama',
+        arabicText: 'اَللّٰهُمَّ إِنَّا نَتَوَسَّلُ إِلَيْكَ بِنَبِيِّكَ مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ نَبِيِّ الرَّحْمَةِ، وَبِجَدِّهِ إِبْرَاهِيْمَ خَلِيْلِ الرَّحْمَنِ، وَبِكَلِمَاتِكَ التَّامَّاتِ، وَبِأَسْمَائِكَ الْحُسْنَى، وَبِأَنْوَاعِ مَعْرِفَتِكَ، أَنْ تَغْفِرَ لَنَا وَتَرْحَمَنَا وَتُفَرِّجَ عَنَّا',
+        translation: 'Ya Allah, sesungguhnya kami menjadikan Nabi-Mu Muhammad shallallahu \'alaihi wasallam sebagai wasilah (perantara) kepada-Mu, Nabi yang membawa rahmat. Dan melalui nenek moyang beliau Ibrahim khalilurrahman. Dan melalui kalimat-kalimat-Mu yang sempurna, nama-nama-Mu yang indah, dan berbagai macam pengenalan kepada-Mu — agar Engkau mengampuni kami, merahmati kami, dan menghilangkan segala kesulitan dari kami.',
+        latinText: 'Allahumma innaa natawassalu ilaika bi-nabiyyika Muhammad shallallahu \'alaihi wasallama nabiyyir-rahmah, wa bijaddihi Ibraahima khaliilir-rahmaan, wa bi-kalimaatikat-taammaati, wa bi-asmaa-ikal husnaa, wa bi-anwai ma\'rifatika, an taghfira lanaa wa tarhamanaa wa tufarrijanna.',
+        sourceNote: 'Tawasul melalui Nabi SAW dan Nabi Ibrahim AS — merujuk pada konsep tawasul yang dibolehkan berdasarkan Al-Quran Surah Al-Ma\'idah ayat 35.',
+      ),
+      ManaqibSection(
+        title: 'Tawasul — Syekh Abdul Qadir Al-Jailani',
+        arabicText: 'اَللّٰهُمَّ إِنَّا نَتَوَسَّلُ إِلَيْكَ بِسَيِّدِنَا وَمَوْلَانَا عَبْدِ الْقَادِرِ الْجَيْلَانِيِّ، وَبِجَدِّهِ إِلَى سَيِّدِنَا مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ، أَنْ تَفْتَحَ لَنَا أَبْوَابَ فَضْلِكَ، وَأَنْ تُيَسِّرَ لَنَا أَسْبَابَ رَحْمَتِكَ، وَأَنْ تَرْزُقَنَا حُسْنَ الْعَاقِبَةِ فِي الْأُمُورِ كُلِّهَا',
+        translation: 'Ya Allah, sesungguhnya kami menjadikan junjungan dan pemimpin kami Syekh Abdul Qadir Al-Jailani sebagai wasilah kepada-Mu, dan melalui silsilah beliau kepada junjungan kami Muhammad shallallahu \'alaihi wasallam — agar Engkau membukakan bagi kami pintu-pintu keutamaan-Mu, memudahkan bagi kami jalan-jalan rahmat-Mu, dan memberikan kami husnul khatimah (kesudahan yang baik) dalam segala urusan.',
+        latinText: 'Allahumma innaa natawassalu ilaika bi-sayyidinaa wa maulanaa \'Abdil Qaadiril Jailaani, wa bijaddihi ila sayyidinaa Muhammad shallallahu \'alaihi wasallam, an taftaha lanaa abwaaba fadhlik, wa an tuyassira lanaa asbaaba rahmatik, wa an tarzuqanaa husnal \'aaqibati fil umuuri kullihaa.',
+        sourceNote: 'Tawasul khusus melalui Syekh Abdul Qadir Al-Jailani (w. 561 H/1166 M), pendiri Thoriqoh Qodiriyyah.',
+      ),
+      ManaqibSection(
+        title: 'Shalawat Penutup',
+        arabicText: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ، وَصَلَّى اللّٰهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلَّمَ',
+        translation: 'Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, serta lindungilah kami dari azab neraka. Dan semoga shalawat serta salam tetap tercurahkan kepada junjungan kami Nabi Muhammad, keluarga, dan seluruh sahabat beliau.',
+        latinText: 'Rabbanaa aatinaa fid-dunyaa hasanatan wa fil aakhirati hasanatan wa qinaa \'adzaaban-naar, wa shallallahu \'ala sayyidinaa Muhammad wa \'ala aalihi wa shahbihi wa sallam.',
+        sourceNote: 'Doa Rabbanaa — Al-Quran Surah Al-Baqarah ayat 201, ditutup dengan shalawat (HR. Tirmidzi).',
+      ),
+    ],
+  ),
+  // ─── MANAQIB SYEKH ABDUL QADIR AL-JAILANI ────────────────────────
+  Manaqib(
+    id: 10,
+    title: 'Manaqib Syekh Abdul Qadir Al-Jailani',
+    arabicTitle: 'مناقب الشيخ عبد القادر الجيلاني',
+    description: 'Bacaan Manaqib yang dibaca oleh jamaah Masjid Darussa\'adah sesuai tradisi Thoriqoh Qodiriyyah.',
+    category: 'Tawasul',
+    source: 'Kitab Al-Fuyudhat Ar-Rabbaniyyah, Syekh Abdul Qadir Al-Jailani',
+    validityNote: 'Manaqib Syekh Abdul Qadir Al-Jailani (w. 561 H/1166 M) adalah bacaan yang umum dibaca di majelis-majelis dzikir di Indonesia, khususnya oleh pengikut Thoriqoh Qodiriyyah. Isinya berisi pujian kepada Allah SWT, shalawat kepada Nabi Muhammad SAW, dan sanjungan kepada Syekh Abdul Qadir Al-Jailani. Teks ini disusun oleh para ulama pengikut beliau dari kalimat-kalimat dan nasihat-nasihat yang diriwayatkan dari Syekh Abdul Qadir Al-Jailani sendiri.',
+    sections: [
+      // ── Bagian 1: Pujian kepada Allah ──
+      ManaqibSection(
+        title: 'Pujian kepada Allah',
+        arabicText: 'يَا رَبَّنَا يَا غَفُورُ يَا رَحِيمُ * يَا عَظِيمُ يَا عَلِيمُ يَا كَرِيمُ\nيَا مَلِيكُ يَا مَلِيكُ يَا قَدِيمُ * يَا حَيُّ يَا قَيُّومُ ذُو الْجَلَالِ وَالْإِكْرَامِ',
+        translation: 'Wahai Tuhan kami, Wahai Yang Maha Pengampun, Wahai Yang Maha Penyayang. Wahai Yang Maha Agung, Wahai Yang Maha Mengetahui, Wahai Yang Maha Mulia. Wahai Yang Maha Merajai, Wahai Yang Maha Kuasa, Wahai Yang Maha Awal. Wahai Yang Maha Hidup, Wahai Yang Maha Berdiri Sendiri, Pemilik Keagungan dan Kemuliaan.',
+        latinText: 'Ya Rabbanaa ya Ghafuuru ya Rahiimu * Ya \'Azhiimu ya \'Aliimu ya Kariimu\nYa Maliiku ya Maliiku ya Qadiimu * Ya Hayyu ya Qoyyuumu dzul Jalaali wal Ikraam.',
+        sourceNote: 'Nadzam pujian kepada Allah — kitab Al-Fuyudhat Ar-Rabbaniyyah',
+      ),
+      ManaqibSection(
+        title: 'Sanjungan kepada Allah (Naat)',
+        arabicText: 'يَا مَنْ يَجِيبُ دَعْوَةَ الْمُضْطَرِّينَ * وَيَكْشِفُ السُّوءَ وَيَغْفِرُ الذُّنُوبَ\nيَا رَبِّ يَا رَبِّ يَا رَبِّ يَا رَبِّ * أَنْتَ الْمَلِيكُ وَأَنْتَ الْمَقْصُودُ',
+        translation: 'Wahai Yang mengabulkan doa orang-orang yang terdesak. Dan Yang menghilangkan keburukan serta mengampuni dosa-dosa. Wahai Tuhan, Wahai Tuhan, Wahai Tuhan, Wahai Tuhan. Engkaulah Yang Maha Merajai dan Engkaulah Yang dituju.',
+        latinText: 'Ya man yajiibu da\'watal mudhtarriina * wa yakshifus-suu-a wa yaghfirudz-dzunuub\nYa Rabbi ya Rabbi ya Rabbi ya Rabbi * Antal Muliiku wa Antal Maqshuud.',
+        sourceNote: 'Sanjungan kepada Allah — bagian dari nadzam manaqib',
+      ),
+      ManaqibSection(
+        title: 'Shalawat kepada Nabi Muhammad SAW',
+        arabicText: 'اَللّٰهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ صَلَاةً دَائِمَةً * وَسَلِّمْ سَلَامًا دَائِمًا * وَبَارِكْ عَلَيْهِ بَرَكَةً كَامِلَةً',
+        translation: 'Ya Allah, berikanlah shalawat dan salam kepada junjungan kita Nabi Muhammad shallallahu \'alaihi wasallam, shalawat yang kekal abadi. Dan salam sejahtera yang kekal abadi. Dan berkahilah beliau dengan berkah yang sempurna.',
+        latinText: 'Allahumma shalli wasallim \'ala sayyidinaa Muhammad shallallahu \'alaihi wasallama shalawatan daa-imatan * wa sallim salaaman daa-imatan * wa baarik \'alaihi barokatan kaamilatan.',
+        sourceNote: 'Shalawat kepada Nabi SAW — pembuka manaqib',
+      ),
+      ManaqibSection(
+        title: 'Sanjungan Kepada Nabi (Madih)',
+        arabicText: 'يَا نَبِيَّ الرَّحْمَةِ يَا شَفِيعَ الْأُمَّةِ * يَا مُحَمَّدُ يَا رَسُولَ اللّٰهِ يَا أَمِينَ\nأَنْتَ الشَّفِيعُ يَوْمَ الْحِسَابِ وَالنِّدَاءِ * وَأَنْتَ الْوَسِيلَةُ إِلَى ذِي الْجَلَالِ وَالْإِكْرَامِ',
+        translation: 'Wahai Nabi Pemberi Rahmat, Wahai Pemberi Syafaat bagi umat. Wahai Muhammad, Wahai Utusan Allah, Wahai Yang Terpercaya. Engkaulah pemberi syafaat di hari perhitungan dan seruan. Dan Engkau adalah wasilah kepada Dzat Yang Mempunyai Keagungan dan Kemuliaan.',
+        latinText: 'Ya Nabiyyar-rahmah ya syafii\'al-ummah * Ya Muhammad ya Rasuulallah ya amiin\nAntas-syafii\'u yawmal-hisaabi wan-nidaa-i * wa Antal wasiilatu ilaa dzil jalaali wal ikraam.',
+        sourceNote: 'Madih Nabi — pujian kepada Rasulullah SAW sebagai wasilah',
+      ),
+      // ── Bagian 2: Pujian Syekh Abdul Qadir ──
+      ManaqibSection(
+        title: 'Sanjungan kepada Syekh Abdul Qadir Al-Jailani',
+        arabicText: 'يَا أَبَا عَبْدِ اللّٰهِ يَا شَيْخَنَا * يَا سَيِّدِي يَا وَلِيَّ اللّٰهِ\nأَنْتَ الْغَوْثُ يَا شَيْخَ عَبْدِ الْقَادِرِ * يَا بَحْرَ الْفَيْضِ وَالْمَدَدِ يَا جَلِيلَ',
+        translation: 'Wahai Abu Abdillah, Wahai Syekh kami. Wahai Sayyid kami, Wahai Wali Allah. Engkau adalah pertolongan, wahai Syekh Abdul Qadir. Wahai Lautan karunia dan pertolongan, wahai Yang Mulia.',
+        latinText: 'Yaa Abaa \'Abdillahi yaa Syaikhanaa * Yaa Sayyidinaa yaa Waliyallah\nAntal ghautsu yaa Syaikha \'Abdil Qaadir * Yaa bahral-faidhi wal madadi yaa Jaliil.',
+        sourceNote: 'Nadzam sanjungan kepada Syekh Abdul Qadir Al-Jailani — Quthb Aulia',
+      ),
+      ManaqibSection(
+        title: 'Syair Pujian Syekh Abdul Qadir',
+        arabicText: 'قَدْ حَازَ مَقَامَاتِ الْأَوْلِيَاءِ جَمِيعِهِمْ * وَأَصْبَحَ فِي الْعِزِّ وَالْجَاهِ وَالشَّرَفِ\nهُوَ السَّيِّدُ الْكَبِيرُ وَالْغَوْثُ الْمُعَظَّمُ * شَيْخُ الطَّرِيقَةِ وَالْحَقِيقَةِ وَالْعِرْفِ',
+        translation: 'Dia telah meraih seluruh maqam para wali. Dan telah menjadi mulia dengan keagungan, kedudukan, dan kehormatan. Dia adalah Sayyid yang agung dan Ghauts (pertolongan) yang dimuliakan. Syekh thoriqoh, haqiqah, dan ma\'rifat.',
+        latinText: 'Qod haaza maqaamaatil awliyaa-i jamii\'ihim * wa ashbaha fil \'izzi wal-jaahi wasy-syaraf\nHuwas-sayyidul kabiiru wal ghautsul mu\'azzham * Syaikhuth-thoriqati wal-haqiiqati wal \'irf.',
+        sourceNote: 'Nadzam yang memuji kedudukan Syekh Abdul Qadir sebagai Quthb Aulia',
+      ),
+      ManaqibSection(
+        title: 'Karamah dan Kedudukan Syekh Abdul Qadir',
+        arabicText: 'اَللّٰهُمَّ إِنِّي أَسْأَلُكَ بِحَقِّ سَيِّدِنَا مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ * وَبِحَقِّ سَيِّدِنَا عَبْدِ الْقَادِرِ الْجَيْلَانِيِّ رَضِيَ اللّٰهُ عَنْهُ * أَنْ تَغْفِرَ لِي ذُنُوبِي وَتُصَلِحَ لِي شَأْنِي',
+        translation: 'Ya Allah, sesungguhnya aku memohon kepada-Mu dengan kehormatan junjungan kita Muhammad shallallahu \'alaihi wasallam. Dan dengan kehormatan junjungan kami Abdul Qadir Al-Jailani radhiyallahu \'anhu — agar Engkau mengampuni dosa-dosaku dan memperbaiki urusanku.',
+        latinText: 'Allahumma innii as-aluka bi-haqqi sayyidinaa Muhammad shallallahu \'alaihi wasallama * wa bi-haqqi sayyidinaa \'Abdil Qaadiril Jailaani radhiyallahu \'anhu * an taghfira lii dzunuubii wa tushliha lii sha\'nii.',
+        sourceNote: 'Doa dengan wasilah Nabi SAW dan Syekh Abdul Qadir Al-Jailani',
+      ),
+      // ── Bagian 3: Istighfar dan Doa ──
+      ManaqibSection(
+        title: 'Istighfar',
+        arabicText: 'أَسْتَغْفِرُ اللّٰهَ الْعَظِيمَ الَّذِي لَا إِلٰهَ إِلَّا هُوَ الْحَيَّ الْقَيُّومَ وَأَتُوبُ إِلَيْهِ',
+        translation: 'Aku memohon ampunan kepada Allah Yang Maha Agung, yang tidak ada ilah selain Dia, Yang Maha Hidup dan Maha Berdiri Sendiri. Dan aku bertaubat kepada-Nya.',
+        latinText: 'Astaghfirullahal \'Azhiimalladzi laa ilaaha illa huwal Hayyal Qoyyum wa atuubu ilaih.',
+        sourceNote: 'Istighfar Agung — HR. Bukhari no. 6307, Muslim no. 2702',
+      ),
+      ManaqibSection(
+        title: 'Doa Penolak Bala',
+        arabicText: 'بِسْمِ اللّٰهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ',
+        translation: 'Dengan nama Allah yang dengan nama-Nya tidak ada sesuatu pun yang membahayakan di bumi dan di langit. Dia Maha Mendengar lagi Maha Mengetahui.',
+        latinText: 'Bismillahilladzi laa yadhurru ma\'asmihi syai-un fil ardhi wa laa fis-samaa-i wa huwas-Samii\'ul \'Aliim.',
+        sourceNote: 'Doa penolak bala — HR. Abu Dawud no. 1556, Tirmidzi no. 3388',
+      ),
+      ManaqibSection(
+        title: 'Doa Kepada Allah',
+        arabicText: 'اَللّٰهُمَّ رَبَّنَا أَنْزِلْ عَلَيْنَا مَائِدَةً مِنَ السَّمَاءِ تَكُونُ لَنَا عِيدًا لِأَوَّلِنَا وَآخِرِنَا وَآيَةً مِنْكَ وَارْزُقْنَا وَأَنْتَ خَيْرُ الرَّازِقِينَ',
+        translation: 'Ya Allah, Tuhan kami, turunkanlah kepada kami hidangan dari langit yang akan menjadi hari raya bagi kami dan bagi orang-orang setelah kami, dan menjadi tanda (kekuasaan)-Mu. Berilah kami rezeki, dan Engkau adalah Pemberi rezeki yang terbaik.',
+        latinText: 'Allahumma Rabbanaa anzil \'alainaa maa-idatan minas-samaa-i takuunu lanaa \'iidan li-awwalinaa wa aakhirinaa wa aayatan minka war-zuqnaa wa Anta khairur-raaziqeen.',
+        sourceNote: 'Doa yang merujuk pada Al-Quran Surah Al-Ma\'idah ayat 114',
+      ),
+      // ── Bagian 4: Dzikir dan Tasbih ──
+      ManaqibSection(
+        title: 'Dzikir Tahlil',
+        arabicText: 'لَا إِلٰهَ إِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ * سَيِّدُنَا مُحَمَّدٌ رَسُولُ اللّٰهِ * صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ',
+        translation: 'Tidak ada ilah yang berhak disembah selain Allah, Muhammad adalah utusan Allah. Junjungan kami Muhammad adalah utusan Allah. Semoga shalawat dan salam tetap tercurahkan kepadanya.',
+        latinText: 'Laa ilaaha illallahu Muhammad Rasuulullah * Sayyidinaa Muhammad Rasuulullah * shallallahu \'alaihi wasallam.',
+        sourceNote: 'Kalimat syahadat + shalawat — dasar keimanan Islam',
+      ),
+      ManaqibSection(
+        title: 'Dzikir Kebesaran Allah',
+        arabicText: 'سُبْحَانَ اللّٰهِ وَالْحَمْدُ لِلّٰهِ وَلَا إِلٰهَ إِلَّا اللّٰهُ وَاللّٰهُ أَكْبَرُ * وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللّٰهِ الْعَلِيِّ الْعَظِيمِ',
+        translation: 'Maha Suci Allah, segala puji bagi Allah, tidak ada ilah selain Allah, dan Allah Maha Besar. Tidak ada daya dan kekuatan kecuali dengan pertolongan Allah Yang Maha Tinggi lagi Maha Agung.',
+        latinText: 'Subhanallah walhamdulillah wa laa ilaaha illallahu wallahu Akbar * wa laa haula wa laa quwwata illa billahil \'Aliyyil \'Azhiim.',
+        sourceNote: 'Dzikir kebesaran Allah — HR. Bukhari no. 6937, Muslim no. 937',
+      ),
+      ManaqibSection(
+        title: 'Tasbih dan Taqdis',
+        arabicText: 'سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ * وَسَلَامٌ عَلَى الْمُرْسَلِينَ * وَالْحَمْدُ لِلّٰهِ رَبِّ الْعَالَمِينَ',
+        translation: 'Maha Suci Tuhanmu, Tuhan Yang Memiliki Kebesaran, dari sifat-sifat yang mereka sifatkan. Dan keselamatan semoga tercurahkan kepada para rasul. Dan segala puji bagi Allah, Tuhan seluruh alam.',
+        latinText: 'Subhana Rabbika Rabbal \'izzati \'ammaa yashifuun * wa salaamun \'alal mursaliin * walhamdulillahi Rabbil \'aalamiin.',
+        sourceNote: 'Penutup dari Surah Ash-Shaffat ayat 180-182',
+      ),
+      // ── Bagian 5: Penutup ──
+      ManaqibSection(
+        title: 'Shalawat Akhir',
+        arabicText: 'اَللّٰهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ * بِعَدَدِ كُلِّ مَعْلُومٍ لَكَ * وَبِعَدَدِ خَلْقِكَ * وَبِعَدَدَ رِضَا نَفْسِكَ * وَبِمِقْدَارِ كَلِمَاتِكَ',
+        translation: 'Ya Allah, berikanlah shalawat dan salam kepada junjungan kami Nabi Muhammad serta keluarga dan seluruh sahabat beliau. Sebanyak segala sesuatu yang Engkau ketahui. Dan sebanyak makhluk-makhluk-Mu. Dan sebanyak kerelaan diri-Mu. Dan sebanding dengan kalimat-kalimat-Mu.',
+        latinText: 'Allahumma shalli wasallim \'ala sayyidinaa Muhammad wa \'ala aalihi wa shahbihi ajma\'iin * bi-\'adadi kulli ma\'luumin lak * wa bi-\'adadi khalqik * wa bi-\'adada ridaa nafsik * wa bi-miqdaari kalimaatik.',
+        sourceNote: 'Shalawat penutup manaqib — pola bilangan tak terhingga sebagai bentuk pengagungan',
+      ),
+      ManaqibSection(
+        title: 'Doa Penutup (Khatimah)',
+        arabicText: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ * وَصَلَّى اللّٰهُ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ أَجْمَعِينَ وَسَلَّمَ تَسْلِيمًا كَثِيرًا',
+        translation: 'Ya Tuhan kami, berikanlah kami kebaikan di dunia dan kebaikan di akhirat, serta lindungilah kami dari azab neraka. Dan semoga shalawat serta salam yang banyak tetap tercurahkan kepada junjungan kami Nabi Muhammad, keluarga, dan seluruh sahabat beliau.',
+        latinText: 'Rabbanaa aatinaa fid-dunyaa hasanatan wa fil aakhirati hasanatan wa qinaa \'adzaaban-naar * wa shallallahu \'ala sayyidinaa Muhammad wa \'ala aalihi wa shahbihi ajma\'iin wa sallama salaaman katsiiraa.',
+        sourceNote: 'Doa Rabbanaa (QS. Al-Baqarah: 201) + shalawat penutup (HR. Bukhari, Muslim)',
+      ),
+    ],
+  ),
 ];
+
+/// Combined list: all bacaan (original + maulid & qasidah)
+final List<Manaqib> allManaqibList = [...manaqibList, ...maulidQasidahList];

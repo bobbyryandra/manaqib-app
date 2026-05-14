@@ -1,0 +1,16 @@
+*.iml
+.dart_tool/
+.packages
+build/
+.metadata
+pubspec.lock
+.android/
+.ios/
+.linux/
+.macos/
+.windows/
+*.class
+*.log
+.DS_Store
+.flutter-plugins
+.flutter-plugins-dependencies
